@@ -1,0 +1,17 @@
+.clientsWrapper{
+  background-color: lightslategrey;
+  width:85vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.singleClient{
+ width: 20vw;
+ margin-left: 5vw;
+ margin-right: 2vw;
+ margin-top: 1.5vh;
+ background-color: linen;
+ border-radius: 10px;
+
+}

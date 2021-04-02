@@ -9,14 +9,14 @@ function Clients () {
 const [clients, setClients,  getData] = useContext(AppContext);
 
 return (
-  <>
+  <div className={styles.clientsWrapper}>
     {clients.length > 0?
-             clients.map(client => <div id={client._id}>
+             clients.map(client => <div className={styles.singleClient} id={client._id}>
                                       <h3>{client.Name}</h3>
                                       <p>{client.City}</p>
                                       <p>{client.Ref}</p>
                                     </div>):'no clients'}
-  </>
+  </div>
 )
 }
 
