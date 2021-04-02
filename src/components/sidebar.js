@@ -5,7 +5,13 @@ function Sidebar () {
 
   return (
     <nav className={styles.sidebar}>
-      Sidebar
+    <div className={styles.navElementDiv}>
+        <p className={styles.navElementP}>Dashboard</p>
+    </div>
+    <div>
+        <p className={styles.navElementP}>Clients</p>  
+    </div>
+     
     </nav>
   )
 
