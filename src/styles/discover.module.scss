@@ -1,3 +1,23 @@
 .wrapper{
   display: flex;
 }
+
+.resultWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 3vh;
+  margin-left: 2vw;
+  margin-right: 2vw;
+
+}
+
+.result{
+  margin-left: 5%;
+  border: solid black 1px;
+  width: 25%;
+  margin-top: 2vh;
+}
+
+.categories{
+  display: flex;
+}

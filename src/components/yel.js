@@ -35,16 +35,19 @@ async function getYelpData () {
           <input placeholder='enter keyword' onKeyUp={(e)=> setTerm(e.target.value)}></input>
           <button onClick={()=> getYelpData()} > Click me</button>
         </div>
+        <div className={styles.resultWrapper}> 
         {results.length > 0? results.map(result => 
-          <>
-            <div>{result.name}</div> 
-            <div>{result.categories.map(cat => <div>{cat.title}</div>)}</div>
-            <div>{result.display_phone}</div>
-            <div>{result.phone}</div>
-            <div>{result.price}</div>
-            <div>{result.location.address1}</div>
-            <a href={result.url}>click</a>
-          </>):'nothing yet'}
+          <div className={styles.result}>
+              {/* <img alt='store' src={result.image_url}></img>  */}
+              <div>{result.name}</div> 
+              <div className={styles.categories}>{result.categories.map(cat => <div>|{cat.title}|</div>)}</div>
+              <div>{result.display_phone}</div>
+              <div>{result.phone}</div>
+              <div>{result.price}</div>
+              <div>{result.location.address1}</div>
+              <a href={result.url}>click</a>
+            </div>):'nothing yet'}
+          </div>
     </div>
   )
 }
