@@ -17,18 +17,20 @@ function searchClients (clients, word) {
 
 
 return (
-  <>
-    <h3>Total {searchResults.length} clients</h3>
-    <input placeholder='enter keyword' onKeyUp={(e)=> {searchClients(clients, e.target.value)}}></input>
-    <div className={styles.clientsWrapper}>
-      {searchResults.length > 0?
-              searchResults.map(client => client.Name && <div className={styles.singleClient} id={client._id}>
-                                        <h3>{client.Name}</h3>
-                                        <p>City: {client.City}</p>
-                                        <p>Ref: {client.Ref}</p>
-                                      </div>):'no clients'}
+  <div className={styles.component}>
+    <input placeholder='Search Clients' onKeyUp={(e)=> {searchClients(clients, e.target.value)}}></input>
+    <div className={styles.clientSerch}>
+      <h3>Total {searchResults.length} clients</h3>
+      <div className={styles.clientsWrapper}>
+        {searchResults.length > 0?
+                searchResults.map(client => client.Name && <div className={styles.singleClient} id={client._id}>
+                                          <h3>{client.Name}</h3>
+                                          <p>City: {client.City}</p>
+                                          <p>Ref: {client.Ref}</p>
+                                        </div>):'no clients'}
+      </div>
     </div>
-  </>
+  </div>
 )
 }
 
