@@ -30,7 +30,7 @@ async function getYelpData () {
    setTerm('');
 }
 
-async function handleClick(id, name, display_phone,phone, price, location, yelp_url, email, salesRep) {
+async function handleClick(id, name, display_phone,phone, price, location, yelp_url, parsedUrl, email, salesRep) {
   const settings = {
     method:'post',
     headers: {
@@ -44,7 +44,8 @@ async function handleClick(id, name, display_phone,phone, price, location, yelp_
       price:price,
       address:location,
       url:yelp_url,
-      contactEmail:email || 'no email',
+      restaurantUrl: 'no restaurant url',
+      contactEmail: email || 'no email',
       salesRep:'Adrian'
      })
   }
@@ -76,7 +77,7 @@ async function handleClick(id, name, display_phone,phone, price, location, yelp_
               <div>{result.price}</div>
               <div>{result.location.address1}</div>
               <a href={result.url}>click</a>
-              <button onClick={(id, name, display_phone,phone, price, location, yelp_url) => handleClick(result.id,result.name, result.display_phone, result.phone,result.price,result.location.address1, result.url)}>Add to prospects list</button>
+              <button onClick={(id, name, display_phone,phone, price, location, yelp_url, parsedUrl, email, salesRep) => handleClick(result.id,result.name, result.display_phone, result.phone,result.price,result.location.address1, result.url)}>Add to prospects list</button>
             </div>):'nothing yet'}
           </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/prospectContext'
 import styles from '../styles/prospect.module.scss'
 
@@ -6,46 +6,43 @@ import styles from '../styles/prospect.module.scss'
 
 
 function Prospects () {
-const [prospects] = useContext(AppContext);
-const [searchResults, setSearchResults] = useState(prospects);
+  const [prospects] = useContext(AppContext);
+  const [searchResults, setSearchResults] = useState(prospects);
 
-function searchProspects (prosps, word) {
-  const names = prosps.filter(client => client.businessName && client.businessName.trim().toLowerCase().includes(word.toLowerCase()));
-  setSearchResults(names);
-}
-async function getLink (url) {
-  
-  const settings = {
-   method:'post',
-   headers: {
-    "Content-type": "application/json"
-  },
-    body: JSON.stringify({
-    url:url})
-}
-console.log('before fetch');
+  function searchProspects (prosps, word) {
+    const names = prosps.filter(client => client.businessName && client.businessName.trim().toLowerCase().includes(word.toLowerCase()));
+    setSearchResults(names);
+  }
+
+  async function getLink (url) {
+    const settings = {
+    method:'post',
+    headers: {
+      "Content-type": "application/json"
+    },
+      body: JSON.stringify({
+      url:url})
+  }
 const response = await fetch('http://localhost:3010/getLink', settings);
-console.log('after fetch');
+
 if (!response.ok)  {
     const message = 'There was an error' + response.status;
     throw new Error(message)
    }
+
    const data = await response.json();
    const restaurantUrl = `https://www.${data[0]}`
-   console.log('URLLL', restaurantUrl);
- 
+   return restaurantUrl;
+
 }
 
 async function handleClick(url){
-      if(!url) console.log('no url')
+      if(!url) alert('there is no url to yelp')
       const link = await getLink(url);
+
       return link;
-     
 }
 
-useEffect(() => {
-  console.log('prospects', prospects);
-}, []);
 
 return (
   <div className={styles.component}>
@@ -58,10 +55,10 @@ return (
                                           <h3>{client.businessName}</h3>
                                           <p>City: {client.displayPhone}</p>
                                           <p>Ref: {client.phone}</p>
-                                          <p>{client.url}</p>
-                                          <p>ID{client.yelp_id}</p>
+                                          <button><a href={client.url}>See in yelp</a></button>
+                                         
                                           
-                                          <button onClick={(url) => handleClick(client.url)}>Get link! </button>
+                                          <button onClick={(url) => handleClick(client.url)}> Save link! </button>
                                         </div>):'no clients'}
       </div>
     </div>
