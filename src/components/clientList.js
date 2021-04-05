@@ -7,7 +7,6 @@ import styles from '../styles/clients.module.scss'
 
 function Clients () {
 const [clients] = useContext(AppContext);
-const [term, setTerm] = useState('')
 const [searchResults, setSearchResults] = useState(clients);
 
 function searchClients (clients, word) {

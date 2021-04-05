@@ -3,6 +3,8 @@ import styles from '../styles/sidebar.module.scss'
 import Clients from './clientList';
 import Dashboard from './mainDash';
 import Discover from './yel';
+import Prospects from './prospects';
+
 
 function Sidebar () {
   const [view, setView] = useState('Dashboard')
@@ -17,10 +19,13 @@ function Sidebar () {
           <p onClick={() => [setView('Clients')]} className={styles.navElementP}>Clients</p>  
       </div>
       <div>
+          <p onClick={() => [setView('Prospects')]} className={styles.navElementP}>Prospects</p>  
+      </div>
+      <div>
           <p onClick={() => [setView('Discover')]} className={styles.navElementP}>Discover</p>  
       </div>
     </nav>
-    {view === 'Dashboard'? <Dashboard />:view === 'Clients'?<Clients/>:view === 'Discover'?<Discover />:null}
+    {view === 'Dashboard'? <Dashboard />:view === 'Clients'?<Clients/>:view === 'Discover'?<Discover />:view === 'Prospects'?<Prospects />:null}
     </div>
   )
 
