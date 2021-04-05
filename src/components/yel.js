@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import styles from '../styles/discover.module.scss'
-
+import React, {useState, useContext} from 'react';
+import styles from '../styles/discover.module.scss';
+import { AppContext } from '../context/prospectContext';
 
 function Discover () {
+  const [prospects, setProspects,  getProspects] = useContext(AppContext);
   const [results, setResults] = useState([]);
   const [term, setTerm ] = useState('');
-  const url = 'http://localhost:3000/'
-  
+  const url = 'http://localhost:3000/';
 
 
 async function getYelpData () {
@@ -56,7 +56,7 @@ async function handleClick(id, name, display_phone,phone, price, location, yelp_
       throw new Error(message)
      }
      const data = await response.json();
-     console.log(data);
+     setProspects([...prospects], data);
 }
 
   return (

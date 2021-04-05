@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../context/prospectContext'
 import styles from '../styles/prospect.module.scss'
 
@@ -6,8 +6,12 @@ import styles from '../styles/prospect.module.scss'
 
 
 function Prospects () {
-  const [prospects] = useContext(AppContext);
+  const [prospects, setProspects,  getProspects] = useContext(AppContext);
   const [searchResults, setSearchResults] = useState(prospects);
+  
+  useEffect(() => { 
+      getProspects();
+  }, []);
 
   function searchProspects (prosps, word) {
     const names = prosps.filter(client => client.businessName && client.businessName.trim().toLowerCase().includes(word.toLowerCase()));
@@ -58,9 +62,8 @@ if (!response.ok)  {
     const message = 'There was an error' + response.status;
     throw new Error(message)
    }
-
    const data = await response.text();
-   return data;
+   setProspects(prospects.filter(prospect => prospect.id !== data))
 }
 
 

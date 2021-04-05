@@ -4,7 +4,11 @@ export const AppContext = createContext();
 
 
 export const ClientContext = (props) => {
-  const [clients, setClients] = useState([]);
+  const [clients, setClients] = useState();
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   async function getData() {
     const response = await fetch('http://localhost:3000/');
@@ -14,15 +18,10 @@ export const ClientContext = (props) => {
       }
   
       const data = await response.json();
-      console.log(data)
+      console.log('client context',data)
       setClients(data);
       return data;
     }
-    
-    useEffect(() => {
-      getData();
-      console.log('clients', clients)
-    }, []);
 
     return (
       <AppContext.Provider value={[clients, setClients,  getData] }>

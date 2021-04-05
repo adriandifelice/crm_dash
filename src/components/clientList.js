@@ -6,13 +6,15 @@ import styles from '../styles/clients.module.scss'
 
 
 function Clients () {
-const [clients] = useContext(AppContext);
+const [clients, _,  getData] = useContext(AppContext);
 const [searchResults, setSearchResults] = useState(clients);
 
 function searchClients (clients, word) {
   const names = clients.filter(client => client.Name && client.Name.trim().toLowerCase().includes(word.toLowerCase()));
   setSearchResults(names);
 }
+
+  
 
 
 return (
