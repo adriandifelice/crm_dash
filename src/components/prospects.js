@@ -43,6 +43,26 @@ async function handleClick(url){
       return link;
 }
 
+async function handleDelete(id){
+const settings = {
+  method:'post',
+  headers: {
+    "Content-type": "application/json"
+  },
+    body: JSON.stringify({
+    id:id})
+  }
+  const response = await fetch('http://localhost:3000/deleteProspect', settings);
+
+if (!response.ok)  {
+    const message = 'There was an error' + response.status;
+    throw new Error(message)
+   }
+
+   const data = await response.text();
+   return data;
+}
+
 
 return (
   <div className={styles.component}>
@@ -53,12 +73,13 @@ return (
         {searchResults.length > 0?
                 searchResults.map(client => client.businessName && <div className={styles.singleClient} id={client._id}>
                                           <h3>{client.businessName}</h3>
-                                          <p>City: {client.displayPhone}</p>
-                                          <p>Ref: {client.phone}</p>
+                                          <p>Phone: {client.displayPhone}</p>
+                                          <p>Phone 2: {client.phone}</p>
+                                          <p>Url: {client.restaurantUrl}</p>
+                                          <p>Email: {client.contactEmail}</p>
                                           <button><a href={client.url}>See in yelp</a></button>
-                                         
-                                          
                                           <button onClick={(url) => handleClick(client.url)}> Save link! </button>
+                                          <button onClick={(id) => handleDelete(client._id)}> Delete Prospect! </button>
                                         </div>):'no clients'}
       </div>
     </div>
