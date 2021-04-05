@@ -4,7 +4,7 @@ import Clients from './clientList';
 import Dashboard from './mainDash';
 import Discover from './yel';
 import Prospects from './prospects';
-
+import Strategy from './strategy';
 
 function Sidebar () {
   const [view, setView] = useState('Dashboard')
@@ -24,8 +24,11 @@ function Sidebar () {
       <div>
           <p onClick={() => [setView('Discover')]} className={styles.navElementP}>Discover</p>  
       </div>
+      <div>
+          <p onClick={() => [setView('Strategy')]} className={styles.navElementP}>Strategy</p>  
+      </div>
     </nav>
-    {view === 'Dashboard'? <Dashboard />:view === 'Clients'?<Clients/>:view === 'Discover'?<Discover />:view === 'Prospects'?<Prospects />:null}
+    {view === 'Dashboard'? <Dashboard />:view === 'Clients'?<Clients/>:view === 'Discover'?<Discover />:view === 'Prospects'?<Prospects />:view === 'Strategy'?<Strategy />:null}
     </div>
   )
 

@@ -10,8 +10,37 @@ const [prospects] = useContext(AppContext);
 const [searchResults, setSearchResults] = useState(prospects);
 
 function searchProspects (prosps, word) {
-  const names = prosps.filter(client => client.Name && client.Name.trim().toLowerCase().includes(word.toLowerCase()));
+  const names = prosps.filter(client => client.businessName && client.businessName.trim().toLowerCase().includes(word.toLowerCase()));
   setSearchResults(names);
+}
+async function getLink (url) {
+  
+  const settings = {
+   method:'post',
+   headers: {
+    "Content-type": "application/json"
+  },
+    body: JSON.stringify({
+    url:url})
+}
+console.log('before fetch');
+const response = await fetch('http://localhost:3010/getLink', settings);
+console.log('after fetch');
+if (!response.ok)  {
+    const message = 'There was an error' + response.status;
+    throw new Error(message)
+   }
+   const data = await response.json();
+   const restaurantUrl = `https://www.${data[0]}`
+   console.log('URLLL', restaurantUrl);
+ 
+}
+
+async function handleClick(url){
+      if(!url) console.log('no url')
+      const link = await getLink(url);
+      return link;
+     
 }
 
 useEffect(() => {
@@ -27,8 +56,12 @@ return (
         {searchResults.length > 0?
                 searchResults.map(client => client.businessName && <div className={styles.singleClient} id={client._id}>
                                           <h3>{client.businessName}</h3>
-                                          <p>City: {client.City}</p>
-                                          <p>Ref: {client.Ref}</p>
+                                          <p>City: {client.displayPhone}</p>
+                                          <p>Ref: {client.phone}</p>
+                                          <p>{client.url}</p>
+                                          <p>ID{client.yelp_id}</p>
+                                          
+                                          <button onClick={(url) => handleClick(client.url)}>Get link! </button>
                                         </div>):'no clients'}
       </div>
     </div>
