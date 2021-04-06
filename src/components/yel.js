@@ -1,13 +1,23 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import styles from '../styles/discover.module.scss';
 import { AppContext } from '../context/prospectContext';
+// import {DiscoveryContext} from '../context/discoverContext'
+
 
 function Discover () {
   const [prospects, setProspects,  getProspects] = useContext(AppContext);
+  // const [prev, setPrev, results, setResults, term, setTerm, getYelpData] = useContext(DiscoveryContext);
+  const [prev, setPrev] = useState({});
   const [results, setResults] = useState([]);
   const [term, setTerm ] = useState('');
   const url = 'http://localhost:3000/';
 
+console.log('results', results);
+useEffect(() => {
+  console.log('on mount', prev);
+  getYelpData();
+  console.log('after mount', prev)
+}, []);
 
 async function getYelpData () {
   const settings = {
@@ -18,6 +28,8 @@ async function getYelpData () {
     body: JSON.stringify({
     name: term})
 }
+console.log('PREVIOUS OBJECT THAT WILL BE SET IF EXISTS', prev.results)
+if (prev.word && term === prev.word) { console.log('CACHED PAPI'); setPrev(prev); setResults(prev.results); return }
 
   const response = await fetch(url+'yelp', settings);
   if (!response.ok)  {
@@ -25,9 +37,18 @@ async function getYelpData () {
     throw new Error(message)
    }
    const data = await response.json();
-   console.log(data);
-   setResults(data) ;
-   setTerm('');
+   let cachedData = {word:term,
+    results:data
+  }
+   console.log('DATA', data);
+   const newObj = Object.assign({}, cachedData )
+   console.log('newObj', newObj)
+   if (newObj.word !== ""){
+    setPrev(newObj);
+    setResults(data) ;
+   }
+ 
+  //  setTerm('');
 }
 
 async function handleClick(id, name, display_phone,phone, price, location, yelp_url, parsedUrl, email, salesRep) {
