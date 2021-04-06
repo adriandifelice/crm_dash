@@ -10,8 +10,9 @@
   
 }
 
-.navElementDiv{
-border-bottom: solid black 1px;
+.navElementDiv:hover {
+    box-shadow: 0px 2px 0px rgba(17, 17, 17, 0.705);
+    cursor:pointer;
 }
 
 .navElementP{

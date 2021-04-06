@@ -28,3 +28,23 @@
   display: flex;
   flex-direction: column;
 }
+input {
+  width:-webkit-fill-available;
+  padding: 10px 5px;
+  float: left;
+  color: rgb(71, 70, 70);
+  border: 0;
+  background: white;
+  border-radius: 3px 0 0 3px;
+  &:focus {
+    outline: 0;
+  }
+}
+.search {
+  width: 40vw;
+  margin: 10vh auto;
+  background: #444;
+  background: rgba(0,0,0,.2);
+  border-radius:  3px;
+  border: 1px solid rgb(1, 5, 255);
+}

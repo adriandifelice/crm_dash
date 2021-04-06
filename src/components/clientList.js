@@ -14,12 +14,15 @@ function searchClients (clients, word) {
   setSearchResults(names);
 }
 
+console.log(searchResults.sort((a, b) => a.Name > b.Name))
   
 
 
 return (
   <div className={styles.component}>
-    <input placeholder='Search Clients' onKeyUp={(e)=> {searchClients(clients, e.target.value)}}></input>
+    <div className={styles.search} >
+        <input placeholder='Search Clients' onKeyUp={(e)=> {searchClients(clients, e.target.value)}}></input>
+    </div>
     <div className={styles.clientSerch}>
       <h3>Total {searchResults.length} clients</h3>
       <div className={styles.clientsWrapper}>

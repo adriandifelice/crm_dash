@@ -8,8 +8,7 @@ import Typography from '@material-ui/core/Typography';
 
 
 function Prospects () {
-  // const classes = useStyles();
-  const [prospects, setProspects,  getProspects, deleteProspect] = useContext(AppContext);
+  const [prospects, _,  getProspects, deleteProspect] = useContext(AppContext);
   const [searchResults, setSearchResults] = useState(prospects);
   
   useEffect(() => { 
@@ -47,10 +46,6 @@ async function handleClick(url){
       return link;
 }
 
-
-// inside the accordion, 
-//    each result returns an accordion summary
-//    and a 
 return (
   <div className={styles.component}>
     <div className={styles.search}>
