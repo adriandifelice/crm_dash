@@ -33,11 +33,9 @@ if (!response.ok)  {
     const message = 'There was an error' + response.status;
     throw new Error(message)
    }
-
-   const data = await response.json();
-   const restaurantUrl = `https://www.${data[0]}`
-   return restaurantUrl;
-
+const data = await response.json();
+const restaurantUrl = `https://www.${data[0]}`
+return restaurantUrl;
 }
 
 async function handleClick(url){
@@ -64,6 +62,7 @@ return (
                                           <button><a href={client.url}>See in yelp</a></button>
                                           <button onClick={(url) => handleClick(client.url)}> Save link! </button>
                                           <button onClick={(id) => deleteProspect(client._id)}> Delete Prospect! </button>
+                                          <button onClick={(id) => deleteProspect(client._id)}> View Menu! </button>
                                         </div>):'no clients'}
       </div>
     </div>
