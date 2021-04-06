@@ -56,7 +56,7 @@ async function handleClick(id, name, display_phone,phone, price, location, yelp_
       throw new Error(message)
      }
      const data = await response.json();
-     setProspects([...prospects], data);
+     setProspects([...prospects, data]);
 }
 
   return (

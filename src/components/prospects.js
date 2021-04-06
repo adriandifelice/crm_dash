@@ -6,12 +6,12 @@ import styles from '../styles/prospect.module.scss'
 
 
 function Prospects () {
-  const [prospects, setProspects,  getProspects] = useContext(AppContext);
+  const [prospects, setProspects,  getProspects, deleteProspect] = useContext(AppContext);
   const [searchResults, setSearchResults] = useState(prospects);
   
   useEffect(() => { 
-      getProspects();
-  }, []);
+      setSearchResults(prospects);
+  }, [prospects]); 
 
   function searchProspects (prosps, word) {
     const names = prosps.filter(client => client.businessName && client.businessName.trim().toLowerCase().includes(word.toLowerCase()));
@@ -43,28 +43,9 @@ if (!response.ok)  {
 async function handleClick(url){
       if(!url) alert('there is no url to yelp')
       const link = await getLink(url);
-
       return link;
 }
 
-async function handleDelete(id){
-const settings = {
-  method:'post',
-  headers: {
-    "Content-type": "application/json"
-  },
-    body: JSON.stringify({
-    id:id})
-  }
-  const response = await fetch('http://localhost:3000/deleteProspect', settings);
-
-if (!response.ok)  {
-    const message = 'There was an error' + response.status;
-    throw new Error(message)
-   }
-   const data = await response.text();
-   setProspects(prospects.filter(prospect => prospect.id !== data))
-}
 
 
 return (
@@ -82,7 +63,7 @@ return (
                                           <p>Email: {client.contactEmail}</p>
                                           <button><a href={client.url}>See in yelp</a></button>
                                           <button onClick={(url) => handleClick(client.url)}> Save link! </button>
-                                          <button onClick={(id) => handleDelete(client._id)}> Delete Prospect! </button>
+                                          <button onClick={(id) => deleteProspect(client._id)}> Delete Prospect! </button>
                                         </div>):'no clients'}
       </div>
     </div>

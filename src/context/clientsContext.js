@@ -4,7 +4,7 @@ export const AppContext = createContext();
 
 
 export const ClientContext = (props) => {
-  const [clients, setClients] = useState();
+  const [clients, setClients] = useState([]);
 
   useEffect(() => {
     getData();
@@ -16,9 +16,7 @@ export const ClientContext = (props) => {
        const message = 'There was an error' + response.status;
        throw new Error(message)
       }
-  
       const data = await response.json();
-      console.log('client context',data)
       setClients(data);
       return data;
     }
