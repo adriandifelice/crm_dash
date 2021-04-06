@@ -1,11 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../context/prospectContext'
 import styles from '../styles/prospect.module.scss'
-
-
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
 
 
 function Prospects () {
+  // const classes = useStyles();
   const [prospects, setProspects,  getProspects, deleteProspect] = useContext(AppContext);
   const [searchResults, setSearchResults] = useState(prospects);
   
@@ -45,25 +48,41 @@ async function handleClick(url){
 }
 
 
-
+// inside the accordion, 
+//    each result returns an accordion summary
+//    and a 
 return (
   <div className={styles.component}>
-    <input placeholder='Search Prospeccts' onKeyUp={(e)=> {searchProspects(prospects, e.target.value)}}></input>
+    <div className={styles.search}>
+      <input placeholder='Search Prospeccts' onKeyUp={(e)=> {searchProspects(prospects, e.target.value)}}></input>
+    </div>
     <div className={styles.clientSerch}>
       <h3>Total {searchResults.length} prospects</h3>
       <div className={styles.clientsWrapper}>
+      
         {searchResults.length > 0?
-                searchResults.map(client => client.businessName && <div className={styles.singleClient} id={client._id}>
-                                          <h3>{client.businessName}</h3>
+                searchResults.map(client => client.businessName && 
+                                    <div className={styles.singleClient} id={client._id}>
+                                    <Accordion>
+                                    <AccordionSummary>
+                                        <Typography >{client.businessName}</Typography>
+                                     </AccordionSummary>
+                                     <AccordionDetails>
+                                        <Typography>
                                           <p>Phone: {client.displayPhone}</p>
                                           <p>Phone 2: {client.phone}</p>
                                           <p>Url: {client.restaurantUrl}</p>
                                           <p>Email: {client.contactEmail}</p>
+                                          <p>Status: {client.status}</p>  
                                           <button><a href={client.url}>See in yelp</a></button>
                                           <button onClick={(url) => handleClick(client.url)}> Save link! </button>
                                           <button onClick={(id) => deleteProspect(client._id)}> Delete Prospect! </button>
                                           <button onClick={(id) => deleteProspect(client._id)}> View Menu! </button>
-                                        </div>):'no clients'}
+                                       </Typography>
+                                     </AccordionDetails>
+                            </Accordion>
+                                     </div> ):'no clients'}
+        
       </div>
     </div>
   </div>
@@ -71,3 +90,9 @@ return (
 }
 
 export default Prospects;
+
+
+
+
+
+

@@ -49,7 +49,7 @@ if (prev.word && term === prev.word) { console.log('CACHED PAPI'); setPrev(prev)
    setTerm('');
 }
 
-async function handleClick(id, name, display_phone,phone, price, location, yelp_url, parsedUrl, email, salesRep) {
+async function handleClick(id, name, display_phone,phone, price, location, yelp_url, parsedUrl, email, salesRep, status) {
   const settings = {
     method:'post',
     headers: {
@@ -65,7 +65,8 @@ async function handleClick(id, name, display_phone,phone, price, location, yelp_
       url:yelp_url,
       restaurantUrl: 'no restaurant url',
       contactEmail: email || 'no email',
-      salesRep:'Adrian'
+      salesRep:'Adrian',
+      status:status || 'Not Contacted'
      })
   }
   
@@ -96,7 +97,7 @@ async function handleClick(id, name, display_phone,phone, price, location, yelp_
                 <div>{result.price}</div>
                 <div>{result.location.address1}</div>
                 <a href={result.url}>click</a>
-                <button onClick={(id, name, display_phone,phone, price, location, yelp_url, parsedUrl, email, salesRep) => handleClick(result.id,result.name, result.display_phone, result.phone,result.price,result.location.address1, result.url)}>Add to prospects list</button>
+                <button onClick={(id, name, display_phone,phone, price, location, yelp_url, parsedUrl, email, salesRep, status) => handleClick(result.id,result.name, result.display_phone, result.phone,result.price,result.location.address1, result.url, status)}>Add to prospects list</button>
               </div>):<ManualEntry />}
           </div>
     </div>
