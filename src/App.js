@@ -9,11 +9,13 @@ import {ProspectContext} from './context/prospectContext';
 
 function App() {
   return (
+    // <DiscoveryContext>
         <ClientContext>
           <ProspectContext>
             <Sidebar />    
           </ProspectContext>
       </ClientContext>
+      // </DiscoveryContext>
   );
 }
 

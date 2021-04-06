@@ -1,7 +1,8 @@
 import React, {useState, useContext, useEffect} from 'react';
 import styles from '../styles/discover.module.scss';
 import { AppContext } from '../context/prospectContext';
-// import {DiscoveryContext} from '../context/discoverContext'
+// import DiscoveryContext from '../context/discoverContext'
+import ManualEntry from './manualEntryForm';
 
 
 function Discover () {
@@ -12,7 +13,7 @@ function Discover () {
   const [term, setTerm ] = useState('');
   const url = 'http://localhost:3000/';
 
-console.log('results', results);
+
 useEffect(() => {
   console.log('on mount', prev);
   getYelpData();
@@ -28,7 +29,6 @@ async function getYelpData () {
     body: JSON.stringify({
     name: term})
 }
-console.log('PREVIOUS OBJECT THAT WILL BE SET IF EXISTS', prev.results)
 if (prev.word && term === prev.word) { console.log('CACHED PAPI'); setPrev(prev); setResults(prev.results); return }
 
   const response = await fetch(url+'yelp', settings);
@@ -40,15 +40,13 @@ if (prev.word && term === prev.word) { console.log('CACHED PAPI'); setPrev(prev)
    let cachedData = {word:term,
     results:data
   }
-   console.log('DATA', data);
    const newObj = Object.assign({}, cachedData )
-   console.log('newObj', newObj)
    if (newObj.word !== ""){
     setPrev(newObj);
     setResults(data) ;
    }
  
-  //  setTerm('');
+   setTerm('');
 }
 
 async function handleClick(id, name, display_phone,phone, price, location, yelp_url, parsedUrl, email, salesRep) {
@@ -88,18 +86,18 @@ async function handleClick(id, name, display_phone,phone, price, location, yelp_
         </div>
         <div className={styles.resultWrapper}> 
         {results.length > 0? results.map(result => 
-          <div className={styles.result} id={result.id}>
-              {/* <img alt='store' src={result.image_url}></img>  */}
-              <div>{result.name}</div> 
-              <div className={styles.categories}>{result.categories.map(cat => <div>|{cat.title}|</div>)}</div>
-              <div>{result.display_phone}</div>
-              <div>{result.phone}</div>
-              {result.email?<div>{result.email}</div>:'no mail'}
-              <div>{result.price}</div>
-              <div>{result.location.address1}</div>
-              <a href={result.url}>click</a>
-              <button onClick={(id, name, display_phone,phone, price, location, yelp_url, parsedUrl, email, salesRep) => handleClick(result.id,result.name, result.display_phone, result.phone,result.price,result.location.address1, result.url)}>Add to prospects list</button>
-            </div>):'nothing yet'}
+            <div className={styles.result} id={result.id}>
+                {/* <img alt='store' src={result.image_url}></img>  */}
+                <div>{result.name}</div> 
+                <div className={styles.categories}>{result.categories.map(cat => <div>|{cat.title}|</div>)}</div>
+                <div>{result.display_phone}</div>
+                <div>{result.phone}</div>
+                {result.email?<div>{result.email}</div>:'no mail'}
+                <div>{result.price}</div>
+                <div>{result.location.address1}</div>
+                <a href={result.url}>click</a>
+                <button onClick={(id, name, display_phone,phone, price, location, yelp_url, parsedUrl, email, salesRep) => handleClick(result.id,result.name, result.display_phone, result.phone,result.price,result.location.address1, result.url)}>Add to prospects list</button>
+              </div>):<ManualEntry />}
           </div>
     </div>
   )
