@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styles from '../styles/sidebar.module.scss'
 import Clients from './clientList';
 import Dashboard from './mainDash';
-import Discover from './yel';
+import Discover from './discover';
 import Prospects from './prospects';
 import Strategy from './strategy';
 

@@ -1,0 +1,23 @@
+
+  input {
+    width:-webkit-fill-available;
+    padding: 10px 5px;
+    float: left;
+    color: rgb(71, 70, 70);
+    background: white;
+    border-radius: 30px;
+    border:solid 1px rgb(46, 46, 46);
+    margin-top: 1vh;
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  input::placeholder {
+    font-size: 15px;
+  }
+
+  button{
+    width:auto;
+    justify-content: center;
+  }

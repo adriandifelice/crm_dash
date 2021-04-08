@@ -1,5 +1,12 @@
 .wrapper{
+  background-color: rgb(245, 246, 248);
+  // width:85vw;
   display: flex;
+  flex-direction: column;
+  // flex-wrap: nowrap;
+  // overflow-y:scroll;
+  // overflow-x: hidden;
+  // height:100vh;
 }
 
 .resultWrapper {
@@ -20,4 +27,27 @@
 
 .categories{
   display: flex;
+}
+
+.search {
+  display: flex;
+  width: 40vw;
+  margin: 10vh auto;
+  input {
+    width:-webkit-fill-available;
+    padding: 10px 5px;
+    float: left;
+    color: rgb(71, 70, 70);
+    background: white;
+    border-radius: 5px;
+    border:solid 1px rgb(7, 7, 7);
+    text-align: center;
+    &:focus {
+      outline: 0;
+    }
+  }
+  input::placeholder {
+    text-align: center;
+    font-size: 18px;
+  }
 }

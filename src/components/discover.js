@@ -1,13 +1,11 @@
 import React, {useState, useContext, useEffect} from 'react';
 import styles from '../styles/discover.module.scss';
 import { AppContext } from '../context/prospectContext';
-// import DiscoveryContext from '../context/discoverContext'
 import ManualEntry from './manualEntryForm';
 
 
 function Discover () {
   const [prospects, setProspects,  getProspects] = useContext(AppContext);
-  // const [prev, setPrev, results, setResults, term, setTerm, getYelpData] = useContext(DiscoveryContext);
   const [prev, setPrev] = useState({});
   const [results, setResults] = useState([]);
   const [term, setTerm ] = useState('');
@@ -15,9 +13,7 @@ function Discover () {
 
 
 useEffect(() => {
-  console.log('on mount', prev);
   getYelpData();
-  console.log('after mount', prev)
 }, []);
 
 async function getYelpData () {
@@ -80,10 +76,11 @@ async function handleClick(id, name, display_phone,phone, price, location, yelp_
 }
 
   return (
-    <div >
-        <div className={styles.wrapper}>
+ 
+      <div className={styles.wrapper}>
+        <div className={styles.search} >
           <input placeholder='Search keyword' value={term} onChange={(e)=> setTerm(e.target.value)}></input>
-          <button onClick={()=> getYelpData()} > Click me</button>
+          <button onClick={()=> getYelpData()} >Discover</button>
         </div>
         <div className={styles.resultWrapper}> 
         {results.length > 0? results.map(result => 
@@ -100,7 +97,8 @@ async function handleClick(id, name, display_phone,phone, price, location, yelp_
                 <button onClick={(id, name, display_phone,phone, price, location, yelp_url, parsedUrl, email, salesRep, status) => handleClick(result.id,result.name, result.display_phone, result.phone,result.price,result.location.address1, result.url, status)}>Add to prospects list</button>
               </div>):<ManualEntry />}
           </div>
-    </div>
+        </div>
+    
   )
 }
 
