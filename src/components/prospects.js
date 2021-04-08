@@ -8,9 +8,10 @@ import Typography from '@material-ui/core/Typography';
 
 
 function Prospects () {
-  const [prospects, _,  getProspects, deleteProspect] = useContext(AppContext);
+  const [prospects, _,  getProspects, deleteProspect, updateStatus] = useContext(AppContext);
   const [searchResults, setSearchResults] = useState(prospects);
-  
+  const [statusToSend, setStatusToSend] = useState('');
+
   useEffect(() => { 
       setSearchResults(prospects);
   }, [prospects]); 
@@ -40,11 +41,12 @@ const restaurantUrl = `https://www.${data[0]}`
 return restaurantUrl;
 }
 
-async function handleClick(url){
+  async function handleClick(url){
       if(!url) alert('there is no url to yelp')
       const link = await getLink(url);
       return link;
 }
+
 
 return (
   <div className={styles.component}>
@@ -72,7 +74,7 @@ return (
                                           <button><a href={client.url}>See in yelp</a></button>
                                           <button onClick={(url) => handleClick(client.url)}> Save link! </button>
                                           <button onClick={(id) => deleteProspect(client._id)}> Delete Prospect! </button>
-                                          <button onClick={(id) => deleteProspect(client._id)}> View Menu! </button>
+                                          {/* <button onClick={(id) => updateStatus(client._id)}> Update Status! </button> */}
                                        </Typography>
                                      </AccordionDetails>
                             </Accordion>
