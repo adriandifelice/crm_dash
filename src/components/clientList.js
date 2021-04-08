@@ -1,6 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../context/clientsContext'
 import styles from '../styles/clients.module.scss'
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
 
 
 
@@ -12,12 +16,7 @@ const [searchResults, setSearchResults] = useState(clients);
 function searchClients (clients, word) {
   const names = clients.filter(client => client.Name && client.Name.trim().toLowerCase().includes(word.toLowerCase()));
   setSearchResults(names);
-}
-
-console.log(searchResults.sort((a, b) => a.Name > b.Name))
-  
-
-
+}  
 return (
   <div className={styles.component}>
     <div className={styles.search} >
@@ -26,16 +25,33 @@ return (
     <div className={styles.clientSerch}>
       <h3>Total {searchResults.length} clients</h3>
       <div className={styles.clientsWrapper}>
+      
         {searchResults.length > 0?
-                searchResults.map(client => client.Name && <div className={styles.singleClient} id={client._id}>
-                                          <h3>{client.Name}</h3>
-                                          <p>City: {client.City}</p>
-                                          <p>Ref: {client.Ref}</p>
-                                        </div>):'no clients'}
+                searchResults.map(client => client.Name && 
+                                <div className={styles.singleClient} id={client._id}>
+                                    <Accordion>
+                                        <AccordionSummary>
+                                          <div className={styles.flex}>
+                                              <div className={styles.test}>
+                                                  <Typography >{client.Name}</Typography>
+                                              </div>
+                                          </div> 
+                                        </AccordionSummary>
+                                        <AccordionDetails>
+                                            <Typography>
+                                              <p>City: {client.City}</p>
+                                              <p>Phone 2: {client.Ref}</p>                            
+                                          </Typography>
+                                        </AccordionDetails>
+                                    </Accordion>
+                                </div> ):'no clients'}
+        
       </div>
     </div>
   </div>
 )
 }
+
+
 
 export default Clients;

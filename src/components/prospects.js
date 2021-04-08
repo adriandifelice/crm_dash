@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography';
 function Prospects () {
   const [prospects, _,  getProspects, deleteProspect, updateStatus] = useContext(AppContext);
   const [searchResults, setSearchResults] = useState(prospects);
-  const [statusToSend, setStatusToSend] = useState('');
 
   useEffect(() => { 
       setSearchResults(prospects);
