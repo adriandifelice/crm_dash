@@ -1,26 +1,24 @@
 import React from 'react';
  import { Formik, Field, Form, ErrorMessage } from 'formik';
+ import styles from '../styles/formikstyles.module.scss';
+ 
  
   const SignupForm  =({fn, id, status}) =>  (
     <div>
     <Formik
       initialValues={{
-        name: 'mochi',
+        status: status,
       }}
       onSubmit={async (values) => {
-        // console.log('defaultvalue', status);
         if(values.status.lenght === 0) alert('select a status');
         await fn(id, values.status);
-    
-
       }}
     >
 
 
 {({values})=> (
        <Form>
-       <label htmlFor="colors">{values.status}</label>
-          <Field name="status" as="select" className="my-select">
+          <Field name="status" as="select" className={styles.select}>
             <option value=""></option>
             <option value="Not Contacted">Not Contacted</option>
             <option value="Contacted">Contacted</option>
@@ -29,7 +27,7 @@ import React from 'react';
             <option value="Closed">Closed</option>
           </Field>
         <ErrorMessage name="status" />
-         <button type="submit">Change status</button>
+         <button type="submit">Update</button>
        </Form>
        )}
     </Formik>
