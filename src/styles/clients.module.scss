@@ -1,5 +1,5 @@
 .clientsWrapper{
-  background-color: rgb(253, 252, 252);
+  background-color: rgb(245, 248, 252);
   width:85vw;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,6 @@
 }
 
 
-
 .singleClient{
   width: 70vw;
   margin-left: 10vw;
@@ -19,34 +18,37 @@
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
   box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
- 
- 
  }
+
 .clientSearch{
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
+
 .component{
   display: flex;
   flex-direction: column;
 }
-input {
+.input {
   width:-webkit-fill-available;
   padding: 10px 5px;
   float: left;
   color: rgb(71, 70, 70);
   border: 0;
   background: white;
-  border-radius: 3px 0 0 3px;
+  border-radius: 30px;
+  border:solid 2px rgb(7, 7, 7);
+  text-align: center;
   &:focus {
     outline: 0;
   }
 }
+.input::placeholder {
+  text-align: center;
+  font-size: 18px;
+}
 .search {
   width: 40vw;
   margin: 10vh auto;
-  background: #444;
-  background: rgba(0,0,0,.2);
-  border-radius:  3px;
-  border: 1px solid rgb(1, 5, 255);
 }

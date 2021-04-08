@@ -20,12 +20,11 @@ function searchClients (clients, word) {
 return (
   <div className={styles.component}>
     <div className={styles.search} >
-        <input placeholder='Search Clients' onKeyUp={(e)=> {searchClients(clients, e.target.value)}}></input>
+        <input className={styles.input} placeholder='Search Clients' onKeyUp={(e)=> {searchClients(clients, e.target.value)}}></input>
     </div>
-    <div className={styles.clientSerch}>
+    <div className={styles.clientSearch}>
       <h3>Total {searchResults.length} clients</h3>
       <div className={styles.clientsWrapper}>
-      
         {searchResults.length > 0?
                 searchResults.map(client => client.Name && 
                                 <div className={styles.singleClient} id={client._id}>
