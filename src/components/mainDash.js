@@ -14,11 +14,14 @@ export default function Dashboard () {
   return (
     <div className={styles.wrapper}>
       <div className={styles.column}>
+     
           <Accordion>
             <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
                 <Typography >Not Contacted {prospects.filter(prospect => prospect.status === 'Not Contacted').length }</Typography>
             </AccordionSummary>
-            <AccordionDetails>
+            
+         
+            <AccordionDetails className={styles.inside}>
                   <Typography>
                       {prospects.length > 0?
                       prospects.map(client => client.status === 'Not Contacted' && 
@@ -41,7 +44,9 @@ export default function Dashboard () {
                              </div> ):'no clients'}
                   </Typography>
             </AccordionDetails>
+           
         </Accordion>
+     
         </div>
         <div className={styles.column}>
          <Accordion>
