@@ -8,7 +8,6 @@ import {ProspectContext} from './context/prospectContext';
 
 function App() {
   return (
-
         <ClientContext>
           <ProspectContext>
             <Sidebar />    

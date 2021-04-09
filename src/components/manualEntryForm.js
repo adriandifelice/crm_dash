@@ -72,7 +72,7 @@ export default function ManualEntry () {
           <input placeholder='salesRep'  onChange={(e)=> setSalesrep(e.target.value)}></input>
           <input placeholder='restaurantUrl'  onChange={(e)=> setRestaurantUrl(e.target.value)}></input>
           <input placeholder='otherPhone'  onChange={(e)=> setOtherPhone(e.target.value)} ></input>
-          <button onClick={(id, nom, phone1,phone2, prx, loc, y_url, parsedUrl, emeil, salesR, Status) => addManualClient(name,phone, phone, price ,address, url1, restaurantUrl, status, id, salesrep, email)}>Add to prospects list</button>
+          <button className={styles.manualButton} onClick={(id, nom, phone1,phone2, prx, loc, y_url, parsedUrl, emeil, salesR, Status) => addManualClient(name,phone, phone, price ,address, url1, restaurantUrl, status, id, salesrep, email)}>Add to prospects list</button>
       </div>
     )
   }

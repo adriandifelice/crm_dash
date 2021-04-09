@@ -1,11 +1,14 @@
 import React, {useState, createContext, useEffect} from 'react';
 
+
 export const AppContext = createContext();
 
 
 export const ProspectContext = (props) => {
   const [prospects, setProspects] = useState([]);
- 
+
+
+
  
   useEffect(() => {
        getProspects();
@@ -43,6 +46,7 @@ export const ProspectContext = (props) => {
       }
       
   async function updateStatus (id, values){
+    console.log('something')
     const settings = {
       method:'post',
       headers: {
@@ -59,8 +63,7 @@ export const ProspectContext = (props) => {
         throw new Error(message)
        }
        const data = await response.text();
-       console.log(data);
-      //  setProspects(prospects.filter(prospect => prospect._id !== data));
+       return data;
   }
 
     return (

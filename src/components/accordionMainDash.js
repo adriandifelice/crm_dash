@@ -39,3 +39,7 @@ function Accord ({title}) {
 )}
 
   export default Accord;
+
+
+  // on click, at the end of the function 
+  //    setAlert = true; displays a div, then in 2 seconds sets to false

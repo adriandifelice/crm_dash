@@ -1,9 +1,11 @@
+
 import React from 'react';
  import { Formik, Field, Form, ErrorMessage } from 'formik';
  import styles from '../styles/formikstyles.module.scss';
- 
+
  
   const SignupForm  =({fn, id, status}) =>  (
+    
     <div>
     <Formik
       initialValues={{
@@ -27,7 +29,7 @@ import React from 'react';
             <option value="Closed">Closed</option>
           </Field>
         <ErrorMessage name="status" />
-         <button type="submit">Update</button>
+         <button type="submit" >Update</button>
        </Form>
        )}
     </Formik>

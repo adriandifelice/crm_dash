@@ -79,8 +79,12 @@ async function handleClick(id, name, display_phone,phone, price, location, yelp_
  
       <div className={styles.wrapper}>
         <div className={styles.search} >
-          <input placeholder='Search keyword' value={term} onChange={(e)=> setTerm(e.target.value)}></input>
-          <button onClick={()=> getYelpData()} >Discover</button>
+          <div>
+            <input placeholder='Search keyword' value={term} onChange={(e)=> setTerm(e.target.value)}></input>
+          </div>
+          <div>
+            <button onClick={()=> getYelpData()} >Search</button>
+          </div>
         </div>
         <div className={styles.resultWrapper}> 
         {results.length > 0? results.map(result => 
