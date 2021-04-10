@@ -9,7 +9,11 @@ function Discover () {
   const [prev, setPrev] = useState({});
   const [results, setResults] = useState([]);
   const [term, setTerm ] = useState('');
+  const [erroralert, setErrorAlert ] = useState('');
+  const [success, setSuccessAlert] = useState('');
   const url = 'http://localhost:3000/';
+
+
 
 
 useEffect(() => {
@@ -17,6 +21,7 @@ useEffect(() => {
 }, []);
 
 async function getYelpData () {
+  if (!term) return;
   const settings = {
   method:'post',
   headers: {
@@ -33,6 +38,9 @@ if (prev.word && term === prev.word) { console.log('CACHED PAPI'); setPrev(prev)
     throw new Error(message)
    }
    const data = await response.json();
+   if (data.length === 0) {setErrorAlert(true);
+   setTimeout(function(){setErrorAlert(false)}, 1500);}
+
    let cachedData = {word:term,
     results:data
   }
@@ -41,7 +49,6 @@ if (prev.word && term === prev.word) { console.log('CACHED PAPI'); setPrev(prev)
     setPrev(newObj);
     setResults(data) ;
    }
- 
    setTerm('');
 }
 
@@ -73,6 +80,8 @@ async function handleClick(id, name, display_phone,phone, price, location, yelp_
      }
      const data = await response.json();
      setProspects([...prospects, data]);
+     setSuccessAlert(true);
+     setTimeout(function(){setSuccessAlert(false)}, 1500);
 }
 
   return (
@@ -81,6 +90,8 @@ async function handleClick(id, name, display_phone,phone, price, location, yelp_
         <div className={styles.search} >
           <div>
             <input placeholder='Search keyword' value={term} onChange={(e)=> setTerm(e.target.value)}></input>
+            {erroralert === true? <div className={styles.errorAlert}>No resource found</div>:null}
+            {success === true? <div className={styles.successAlert}>Sucess</div>:null}
           </div>
           <div>
             <button onClick={()=> getYelpData()} >Search</button>
@@ -100,7 +111,7 @@ async function handleClick(id, name, display_phone,phone, price, location, yelp_
                 <a href={result.url}>click</a>
                 <button onClick={(id, name, display_phone,phone, price, location, yelp_url, parsedUrl, email, salesRep, status) => handleClick(result.id,result.name, result.display_phone, result.phone,result.price,result.location.address1, result.url, status)}>Add to prospects list</button>
               </div>):<ManualEntry />}
-          </div>
+            </div>
         </div>
     
   )

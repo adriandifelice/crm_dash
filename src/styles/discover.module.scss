@@ -63,3 +63,32 @@
     margin-top: 10px;
   }
 }
+
+.errorAlert{
+  background-color: rgba(255, 0, 0, 0.836);
+  color: white;
+  height: 6vh;
+  width: 50vw;
+  text-align: center;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom:2vh;
+  left: 30vw;
+}
+.successAlert{
+  background-color:green;
+  color: white;
+  height: 6vh;
+  width: 50vw;
+  text-align: center;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom:2vh;
+  left: 30vw;
+}

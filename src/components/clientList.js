@@ -25,6 +25,7 @@ return (
     <div className={styles.clientSearch}>
       <h3>Total {searchResults.length} clients</h3>
       <div className={styles.clientsWrapper}>
+      <div className={styles.test}>
         {searchResults.length > 0?
                 searchResults.map(client => client.Name && 
                                 <div className={styles.singleClient} id={client._id}>
@@ -44,6 +45,7 @@ return (
                                         </AccordionDetails>
                                     </Accordion>
                                 </div> ):'no clients'}
+                                </div>
         
       </div>
     </div>

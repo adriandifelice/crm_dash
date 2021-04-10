@@ -4,8 +4,7 @@ import React from 'react';
  import styles from '../styles/formikstyles.module.scss';
 
  
-  const SignupForm  =({fn, id, status}) =>  (
-    
+  const UpdateStatusForm  =({fn, id, status}) =>  (
     <div>
     <Formik
       initialValues={{
@@ -34,7 +33,6 @@ import React from 'react';
        )}
     </Formik>
   </div>
+);
 
-   );
-
-  export default SignupForm;
+  export default UpdateStatusForm;

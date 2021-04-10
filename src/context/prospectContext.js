@@ -46,7 +46,6 @@ export const ProspectContext = (props) => {
       }
       
   async function updateStatus (id, values){
-    console.log('something')
     const settings = {
       method:'post',
       headers: {
