@@ -15,7 +15,6 @@ function Discover () {
 
 
 
-
 useEffect(() => {
   getYelpData();
 }, []);

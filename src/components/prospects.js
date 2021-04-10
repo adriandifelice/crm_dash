@@ -61,7 +61,16 @@ return (
                                     <div className={styles.singleClient} id={client._id}>
                                     <Accordion>
                                     <AccordionSummary>
-                                        <Typography >{client.businessName}</Typography>
+                                    <div className={styles.prospectDiv}>
+                                          <div>
+                                              <Typography >{client.businessName}</Typography> 
+                                          </div>
+                                          <div>
+                                              <i class="fa fa-trash" onClick={(id) => deleteProspect(client._id)} ></i>            
+
+                                          </div>
+                                        </div> 
+                                        
                                      </AccordionSummary>
                                      <AccordionDetails>
                                         <Typography>
@@ -72,7 +81,6 @@ return (
                                           <p>Status: {client.status}</p>  
                                           <button><a href={client.url}>See in yelp</a></button>
                                           <button onClick={(url) => handleClick(client.url)}> Save link! </button>
-                                          <button onClick={(id) => deleteProspect(client._id)}> Delete Prospect! </button>
                                           {/* <button onClick={(id) => updateStatus(client._id)}> Update Status! </button> */}
                                        </Typography>
                                      </AccordionDetails>
