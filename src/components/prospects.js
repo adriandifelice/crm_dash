@@ -55,7 +55,6 @@ return (
     <div className={styles.clientSerch}>
       <h3>Total {searchResults.length} prospects</h3>
       <div className={styles.clientsWrapper}>
-      
         {searchResults.length > 0?
                 searchResults.map(client => client.businessName && 
                                     <div className={styles.singleClient} id={client._id}>

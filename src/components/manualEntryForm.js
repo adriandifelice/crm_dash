@@ -15,11 +15,12 @@ export default function ManualEntry () {
   const [address, setAddress] = useState('');
   const [url1, setUrl] = useState('');
   const [restaurantUrl, setRestaurantUrl] = useState('');
-  const [salesrep, setSalesrep] = useState('');
-  const [status, setStatus] = useState('');
+  const [salesrep, setSalesrep] = useState('Adrian');
+  const [status, setStatus] = useState('Not Contacted');
   const [otherPhone, setOtherPhone ] = useState('');
   const [erroralert, setErrorAlert ] = useState('');
   const [success, setSuccessAlert] = useState('');
+  const [contactName, setContactName] = useState('');
   const url = 'http://localhost:3000/';
   
   async function addManualClient(id, nom, phone1,phone2, prx, loc, y_url, parsedUrl, emeil, salesR, Status) {
@@ -33,6 +34,7 @@ export default function ManualEntry () {
         body: JSON.stringify({
         yelp_id:id|| '',  
         businessName:name || '',
+        contactName:contactName || '',
         displayPhone:phone || '',
         phone:phone || '',
         price:price|| '',
@@ -58,29 +60,32 @@ export default function ManualEntry () {
        setProspects([...prospects, data]);
        setName('');
        setDisplayPhone('');
+       setContactName('');
        setPhone('');
        setPrice('');
        setLocation('');
        setEmail('');
        setAddress('');
+       setRestaurantUrl('');
        setSuccessAlert(true);
        setTimeout(function(){setSuccessAlert(false)}, 1500);
   }
 
     return (
       <div className={styles.wrapper}>
-          <input required placeholder='Name' onChange={(e)=> setName(e.target.value)}></input>
-          <input placeholder='Phone' onChange={(e)=> setPhone(e.target.value)}></input>
-          <input placeholder='Other Phone'  onChange={(e)=> setPhone(e.target.value)}></input>
-          <input placeholder='Email'  onChange={(e)=> setEmail(e.target.value)}></input>
-          <input placeholder='Price'  onChange={(e)=> setPrice(e.target.value)}></input>
-          <input placeholder='address'  onChange={(e)=> setLocation(e.target.value)}></input>
-          <input placeholder='url'  onChange={(e)=> setUrl(e.target.value)}></input>
-          <input placeholder='status' onChange={(e)=> setStatus(e.target.value)}></input>
-          <input placeholder='id'  onChange={(e)=> setId(e.target.value)}></input>
-          <input placeholder='salesRep'  onChange={(e)=> setSalesrep(e.target.value)}></input>
-          <input placeholder='restaurantUrl'  onChange={(e)=> setRestaurantUrl(e.target.value)}></input>
-          <input placeholder='otherPhone'  onChange={(e)=> setOtherPhone(e.target.value)} ></input>
+          <input required placeholder='Name' value={name} onChange={(e)=> setName(e.target.value)}></input>
+          <input placeholder='Phone' value={phone} onChange={(e)=> setPhone(e.target.value)}></input>
+          <input placeholder='Other Phone' value={otherPhone} onChange={(e)=> setPhone(e.target.value)}></input>
+          <input placeholder='Contact Name' value={contactName} onChange={(e)=> setContactName(e.target.value)}></input>
+          <input placeholder='Email' value={email} onChange={(e)=> setEmail(e.target.value)}></input>
+          <input placeholder='Price' value={price} onChange={(e)=> setPrice(e.target.value)}></input>
+          <input placeholder='Address' value={address} onChange={(e)=> setAddress(e.target.value)}></input>
+          <input placeholder='Url' value={url1} onChange={(e)=> setUrl(e.target.value)}></input>
+          <input placeholder='Status'value={status} onChange={(e)=> setStatus(e.target.value)}></input>
+          <input placeholder='Id' value={id} onChange={(e)=> setId(e.target.value)}></input>
+          <input placeholder='Sales Rep' value={salesrep} onChange={(e)=> setSalesrep(e.target.value)}></input>
+          <input placeholder='Restaurant Url' value={restaurantUrl} onChange={(e)=> setRestaurantUrl(e.target.value)}></input>
+          {/* <input placeholder='otherPhone' value={name} onChange={(e)=> setOtherPhone(e.target.value)} ></input> */}
           <button type='submit' className={styles.manualButton} onClick={(id, nom, phone1,phone2, prx, loc, y_url, parsedUrl, emeil, salesR, Status) => addManualClient(name,phone, phone, price ,address, url1, restaurantUrl, status, id, salesrep, email)}>Add to prospects list</button>
           {erroralert === true? <div className={styles.errorAlert}>No resource found</div>:null}
           {success === true? <div className={styles.successAlert}>Sucess</div>:null}

@@ -8,8 +8,6 @@ export const ProspectContext = (props) => {
   const [prospects, setProspects] = useState([]);
 
 
-
- 
   useEffect(() => {
        getProspects();
   }, [setProspects]);
@@ -26,7 +24,7 @@ export const ProspectContext = (props) => {
       return data;
     }
 
-    async function deleteProspect(id){
+  async function deleteProspect(id){
       const settings = {
         method:'post',
         headers: {
