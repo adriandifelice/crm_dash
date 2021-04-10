@@ -84,7 +84,6 @@ async function handleClick(id, name, display_phone,phone, price, location, yelp_
 }
 
   return (
- 
       <div className={styles.wrapper}>
         <div className={styles.search} >
           <div>

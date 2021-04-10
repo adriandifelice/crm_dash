@@ -21,6 +21,7 @@ export default function ManualEntry () {
   const [erroralert, setErrorAlert ] = useState('');
   const [success, setSuccessAlert] = useState('');
   const [contactName, setContactName] = useState('');
+  const [contactTitle, setContactTitle] = useState('');
   const url = 'http://localhost:3000/';
   
   async function addManualClient(id, nom, phone1,phone2, prx, loc, y_url, parsedUrl, emeil, salesR, Status) {
@@ -35,6 +36,7 @@ export default function ManualEntry () {
         yelp_id:id|| '',  
         businessName:name || '',
         contactName:contactName || '',
+        contactTitle:contactTitle || '',
         displayPhone:phone || '',
         phone:phone || '',
         price:price|| '',
@@ -61,6 +63,7 @@ export default function ManualEntry () {
        setName('');
        setDisplayPhone('');
        setContactName('');
+       setContactTitle('');
        setPhone('');
        setPrice('');
        setLocation('');
@@ -77,6 +80,7 @@ export default function ManualEntry () {
           <input placeholder='Phone' value={phone} onChange={(e)=> setPhone(e.target.value)}></input>
           <input placeholder='Other Phone' value={otherPhone} onChange={(e)=> setPhone(e.target.value)}></input>
           <input placeholder='Contact Name' value={contactName} onChange={(e)=> setContactName(e.target.value)}></input>
+          <input placeholder='Contact Title' value={contactTitle} onChange={(e)=> setContactTitle(e.target.value)}></input>
           <input placeholder='Email' value={email} onChange={(e)=> setEmail(e.target.value)}></input>
           <input placeholder='Price' value={price} onChange={(e)=> setPrice(e.target.value)}></input>
           <input placeholder='Address' value={address} onChange={(e)=> setAddress(e.target.value)}></input>
