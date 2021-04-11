@@ -22,11 +22,13 @@ export default function ManualEntry () {
   const [success, setSuccessAlert] = useState('');
   const [contactName, setContactName] = useState('');
   const [contactTitle, setContactTitle] = useState('');
+  const [category, setCategory] = useState('');
   const url = 'http://localhost:3000/';
   
-  async function addManualClient(id, nom, phone1,phone2, prx, loc, y_url, parsedUrl, emeil, salesR, Status) {
+  async function addManualClient(id, nom, phone1,phone2, prx, loc, y_url, parsedUrl, emeil, salesR, Status, cat) {
     if(name.length === 0 || name === 'undefined') {setErrorAlert(true);
       setTimeout(function(){setErrorAlert(false)}, 1500);}
+      console.log(category);
     const settings = {
       method:'post',
       headers: {
@@ -45,7 +47,8 @@ export default function ManualEntry () {
         restaurantUrl: restaurantUrl || '',
         contactEmail: email || 'no email',
         salesRep:'Adrian' || '',
-        status:'Not Contacted'
+        status:'Not Contacted',
+        category:category
        })
       }
       const response = await fetch(url+'addProspect', settings);
@@ -72,6 +75,7 @@ export default function ManualEntry () {
        setRestaurantUrl('');
        setSuccessAlert(true);
        setTimeout(function(){setSuccessAlert(false)}, 1500);
+       setCategory('');
   }
 
     return (
@@ -89,13 +93,16 @@ export default function ManualEntry () {
           <input placeholder='Id' value={id} onChange={(e)=> setId(e.target.value)}></input>
           <input placeholder='Sales Rep' value={salesrep} onChange={(e)=> setSalesrep(e.target.value)}></input>
           <input placeholder='Restaurant Url' value={restaurantUrl} onChange={(e)=> setRestaurantUrl(e.target.value)}></input>
-          {/* <input placeholder='otherPhone' value={name} onChange={(e)=> setOtherPhone(e.target.value)} ></input> */}
-          <button type='submit' className={styles.manualButton} onClick={(id, nom, phone1,phone2, prx, loc, y_url, parsedUrl, emeil, salesR, Status) => addManualClient(name,phone, phone, price ,address, url1, restaurantUrl, status, id, salesrep, email)}>Add to prospects list</button>
+          <select name="category" id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+              <option value="">Choose Category</option>
+              <option value="restaurant">restaurant</option>
+              <option value="hotel">hotel</option>
+              <option value="store/supermarket">store/supermarket</option>
+              <option value="other">other</option>
+          </select>
+          <button type='submit' className={styles.manualButton} onClick={(id, nom, phone1,phone2, prx, loc, y_url, parsedUrl, emeil, salesR, Status, cat) => addManualClient(name,phone, phone, price ,address, url1, restaurantUrl, status, id, salesrep, email, category)}>Add to prospects list</button>
           {erroralert === true? <div className={styles.errorAlert}>No resource found</div>:null}
           {success === true? <div className={styles.successAlert}>Sucess</div>:null}
       </div>
     )
   }
-
-
-  // Formik for manual entry
