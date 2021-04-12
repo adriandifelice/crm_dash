@@ -14,6 +14,7 @@ const [clients, _,  getData] = useContext(AppContext);
 const [searchResults, setSearchResults] = useState(clients);
 
 function searchClients (clients, word) {
+  if(word === ' ') return clients;
   const names = clients.filter(client => client.Name && client.Name.trim().toLowerCase().includes(word.toLowerCase()));
   setSearchResults(names);
 }  

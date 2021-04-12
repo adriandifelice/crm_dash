@@ -2,10 +2,11 @@ import React, {useState, useContext, useEffect} from 'react';
 import styles from '../styles/discover.module.scss';
 import { AppContext } from '../context/prospectContext';
 import ManualEntry from './manualEntryForm';
-
+import {AppContext as ClientContext} from '../context/clientsContext';
 
 function Discover () {
   const [prospects, setProspects,  getProspects] = useContext(AppContext);
+  const [clients, _,  __] = useContext(ClientContext);
   const [prev, setPrev] = useState({});
   const [results, setResults] = useState([]);
   const [term, setTerm ] = useState('');
@@ -52,6 +53,9 @@ if (prev.word && term === prev.word) { console.log('CACHED PAPI'); setPrev(prev)
 }
 
 async function handleClick(id, name, display_phone,phone, price, location, yelp_url, parsedUrl, email, salesRep, status) {
+  const isClient = await clients.find(client => client.businessName.trim().toLowerCase() === name.trim().toLowereCase());
+  if (isClient) {alert('Already a client'); return;}
+
   const settings = {
     method:'post',
     headers: {
@@ -108,7 +112,7 @@ async function handleClick(id, name, display_phone,phone, price, location, yelp_
                 <div>{result.location.address1}</div>
                 <a href={result.url}>click</a>
                 <button onClick={(id, name, display_phone,phone, price, location, yelp_url, parsedUrl, email, salesRep, status) => handleClick(result.id,result.name, result.display_phone, result.phone,result.price,result.location.address1, result.url, status)}>Add to prospects list</button>
-              </div>):<ManualEntry />}
+              </div>):<ManualEntry clientes={clients} />}
             </div>
         </div>
     

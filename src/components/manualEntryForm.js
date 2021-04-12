@@ -3,7 +3,7 @@ import styles from '../styles/manualentry.module.scss'
 import { AppContext } from '../context/prospectContext';
 
 
-export default function ManualEntry () {
+export default function ManualEntry ({clientes}) {
   const [prospects, setProspects,  getProspects] = useContext(AppContext);
   const [name, setName] = useState('');
   const [display_phone, setDisplayPhone] = useState('');
@@ -23,59 +23,63 @@ export default function ManualEntry () {
   const [contactName, setContactName] = useState('');
   const [contactTitle, setContactTitle] = useState('');
   const [category, setCategory] = useState('');
+  const clients = clientes;
   const url = 'http://localhost:3000/';
   
   async function addManualClient(id, nom, phone1,phone2, prx, loc, y_url, parsedUrl, emeil, salesR, Status, cat) {
     if(name.length === 0 || name === 'undefined') {setErrorAlert(true);
       setTimeout(function(){setErrorAlert(false)}, 1500);}
-      console.log(category);
-    const settings = {
-      method:'post',
-      headers: {
-        "Content-type": "application/json"
-      },
-        body: JSON.stringify({
-        yelp_id:id|| '',  
-        businessName:name || '',
-        contactName:contactName || '',
-        contactTitle:contactTitle || '',
-        displayPhone:phone || '',
-        phone:phone || '',
-        price:price|| '',
-        address:address || '',
-        url:url1 || '',
-        restaurantUrl: restaurantUrl || '',
-        contactEmail: email || 'no email',
-        salesRep:'Adrian' || '',
-        status:'Not Contacted',
-        category:category
-       })
-      }
-      const response = await fetch(url+'addProspect', settings);
-      if (!response.ok)  {
-        setErrorAlert(true);
-        setTimeout(function(){setErrorAlert(false)}, 1500);
-        return;
-       }
-       const data = await response.json();
-       if (data.mess) {setErrorAlert(true);
-            setTimeout(function(){setErrorAlert(false)}, 1500);
-            return;}
 
-       setProspects([...prospects, data]);
-       setName('');
-       setDisplayPhone('');
-       setContactName('');
-       setContactTitle('');
-       setPhone('');
-       setPrice('');
-       setLocation('');
-       setEmail('');
-       setAddress('');
-       setRestaurantUrl('');
-       setSuccessAlert(true);
-       setTimeout(function(){setSuccessAlert(false)}, 1500);
-       setCategory('');
+      const isClient = clients.some(client => client.Name.trim().toLowerCase() === name.trim().toLowerCase());
+      if(isClient) {alert('already in clients'); return;}
+  
+        const settings = {
+          method:'post',
+          headers: {
+            "Content-type": "application/json"
+          },
+            body: JSON.stringify({
+            yelp_id:id|| '',  
+            businessName:name || '',
+            contactName:contactName || '',
+            contactTitle:contactTitle || '',
+            displayPhone:phone || '',
+            phone:phone || '',
+            price:price|| '',
+            address:address || '',
+            url:url1 || '',
+            restaurantUrl: restaurantUrl || '',
+            contactEmail: email || 'no email',
+            salesRep:'Adrian' || '',
+            status:'Not Contacted',
+            category:category
+           })
+          }
+          const response = await fetch(url+'addProspect', settings);
+          if (!response.ok)  {
+            setErrorAlert(true);
+            setTimeout(function(){setErrorAlert(false)}, 1500);
+            return;
+           }
+           const data = await response.json();
+           if (data.mess) {setErrorAlert(true);
+                setTimeout(function(){setErrorAlert(false)}, 1500);
+                return;}
+    
+           setProspects([...prospects, data]);
+           setName('');
+           setDisplayPhone('');
+           setContactName('');
+           setContactTitle('');
+           setPhone('');
+           setPrice('');
+           setLocation('');
+           setEmail('');
+           setAddress('');
+           setRestaurantUrl('');
+           setSuccessAlert(true);
+           setTimeout(function(){setSuccessAlert(false)}, 1500);
+           setCategory('');
   }
 
     return (

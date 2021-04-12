@@ -30,16 +30,12 @@ function Accord ({title}) {
                                       <Form id={client._id} fn={updateStatus}/>
                                     </Typography>
                                 </AccordionDetails>
-                            </Accordion> </div> ):'no clients'}
+                            </Accordion> 
+                      </div> ):'no clients'}
                   </Typography>
             </AccordionDetails>
           </Accordion>
-
         </div>
 )}
 
   export default Accord;
-
-
-  // on click, at the end of the function 
-  //    setAlert = true; displays a div, then in 2 seconds sets to false
